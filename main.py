@@ -1,6 +1,5 @@
-from fungsi import musa
-from fungsi import panjang
-from fungsi import login
+
+from spesifikasi import login
 
 logged = []
 masuk = False
