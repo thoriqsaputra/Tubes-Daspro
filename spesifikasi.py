@@ -60,7 +60,7 @@ def summonjin():
             while True:
                 passjin = input("Masukkan password jin: ")
                 print("\nPassword panjangnya harus 5-25 karakter!\n")
-                if not(5 <= panjang(passjin) <= 25):
+                if not(5 <= len(passjin) <= 25):
                     continue
                 else:
                     masukinae(userdata, f"{userjin};{passjin};{rolejin}\n")            
