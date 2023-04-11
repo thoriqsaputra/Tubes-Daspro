@@ -1,5 +1,6 @@
 
 from spesifikasi import login
+from spesifikasi import logout
 
 logged = []
 masuk = False
@@ -11,5 +12,4 @@ while True:
             masuk = True
             continue
     elif x == "logout":
-        logged = []
-        masuk = False
+        logout()

@@ -5,7 +5,7 @@ def panjang(a):
     return e  
 
 def masukinae(lis, word):
-    for i in range(panjang(lis)):
+    for i in range(101):
         if lis[i] == "":
             lis[i] = word
             break
