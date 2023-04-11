@@ -1,8 +1,3 @@
-def panjang(a):
-    e = 0
-    for i in a:
-        e += 1  
-    return e  
 
 def masukinae(lis, word):
     for i in range(101):

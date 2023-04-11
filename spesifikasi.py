@@ -1,15 +1,11 @@
 from function import musa
 from function import masukinae
-from function import panjang
 
 userdata = ["" for i in range(103)]
 
 user_data = open("csv files/user.csv","r")
 for baris in user_data:
     masukinae(userdata, baris)
-
-
-
 
 def isuser(newuser):
     for i in range(102):
