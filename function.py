@@ -1,7 +1,7 @@
 from typing import List
 
 def masukinae(lis: List[str], word: str):
-    for i in range(101):
+    for i in range(102):
         if lis[i] == "":
             lis[i] = word
             break
@@ -22,3 +22,4 @@ def musa(a: str,b: int) -> List[str]:
         else: #jika tidak yang lain maka akan dimasukan ke variabel temporary
             temp += str(a[i])
     return listbaru
+

@@ -3,7 +3,6 @@ from function import masukinae
 from typing import List
 
 userdata = ["" for i in range(103)]
-
 user_data = open("csv files/user.csv","r")
 for baris in user_data:
     masukinae(userdata, baris)
@@ -88,3 +87,27 @@ def hapusjin():
 
         else:
             print("Tidak ada jin dengan username tersebut.")
+
+def ubahjin():
+    namajin = input("Masukkan username jin: ")
+    status = False 
+    for i in range (102):
+        userlogin = musa(userdata[i], 3)
+        if userlogin[0] == namajin:
+            status = True
+            index = i
+            break
+    if status == False:
+        print("Tidak ada jin dengan username tersebut.")
+    else:
+        if userlogin[2] == "Pengumpul":
+            opsi = input("Jin ini bertipe Pengumpul. Yakin ingin mnengubah tipe jin? (Y/ N?): ")
+            if opsi == "Y":
+                userdata[index] = f"{userlogin[0]};{userlogin[1]};jin_pembangun\n"      
+                print("Jin telah berhasil diubah.")
+        else:
+            opsi = input("Jin ini bertipe Pembangun. Yakin ingin mengubah tipe jin? (Y/N): ")
+            if opsi == "Y":
+                userdata[index] = f"{userlogin[0]};{userlogin[1]};jin_pengumpul\n"     
+                print("Jin telah berhasil diubah.")
+                
