@@ -1,14 +1,15 @@
+from typing import List
 
-def masukinae(lis, word):
+def masukinae(lis: List[str], word: str):
     for i in range(101):
         if lis[i] == "":
             lis[i] = word
             break
     return lis
 
-def musa(a):
+def musa(a: str,b: int) -> List[str]:
     temp = "" #tempat sementara kata
-    listbaru = ["a" for i in range(3)] #list baru untuk string yang di split
+    listbaru = ["a" for i in range(b)] #list baru untuk string yang di split
     x = 0
     for i in range(len(a)) : #dalam loop jika ada ",", " ", atau ";" maka akan dimasukan ke indeks pertama dst
         if a[i] == " " or a[i] == "," or a[i] == ";" or a[i] == "\n":

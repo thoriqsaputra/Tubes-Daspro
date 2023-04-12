@@ -1,5 +1,6 @@
 from function import musa
 from function import masukinae
+from typing import List
 
 userdata = ["" for i in range(103)]
 
@@ -7,34 +8,34 @@ user_data = open("csv files/user.csv","r")
 for baris in user_data:
     masukinae(userdata, baris)
 
-def isuser(newuser):
+def isuser(newuser: str) -> bool:
     for i in range(102):
-        userlogin = musa(userdata[i])
+        userlogin = musa(userdata[i], 3)
         if newuser == userlogin[0]:
             return True
     return False
 
-def login():
+def login(t: List[str]) -> List[str]:
     while True:
         user_data = open("csv files/user.csv","r")
         user = input("Username: ")
         pa55 = input("Password: ")
 
         for baris in user_data:
-            userlogin = musa(baris)
+            userlogin = musa(baris,3)
             if user == userlogin[0] and pa55 == userlogin[1]:
                 print(f"\nSelamat datang, {user} \nMasukkan command “help” untuk daftar command yang dapat kamu panggil")
-                return
+                t = userlogin[0]
+                return t
             elif user == userlogin[0] and pa55 != userlogin[1]:
                 print("\nPassword salah!")
                 break
         else:
             print("Username tidak terdaftar!")
 
-def logout():
-    logged = ""
-    masuk = False
-    return masuk, logged
+def logout(l: str) -> str:
+    l = ""
+    return l
 
 def summonjin():
     print("Jenis jin yang dapat dipanggil:\n (1) Pengumpul - Bertugas mengumpulkan bahan bangunan\n (2) Pembangun - Bertugas membangun candi\n")
@@ -75,7 +76,7 @@ def hapusjin():
                 yesno = input(f"Apakah anda yakin ingin menghapus jin dengan username {jinhapus} (Y/N)? ")
                 if yesno == "Y":
                     for i in range(101):
-                        userlogin = musa(userdata[i])
+                        userlogin = musa(userdata[i], 3)
                         if jinhapus == userlogin[0]:
                             userdata[i] = ""
                             print("\nJin telah berhasil dihapus dari alam gaib.")
