@@ -1,6 +1,6 @@
 from typing import List
 
-def masukinae(lis: List[str], word: str):
+def masukinae(lis: List[str], word: str) -> List[str]:
     for i in range(102):
         if lis[i] == "":
             lis[i] = word
@@ -9,7 +9,7 @@ def masukinae(lis: List[str], word: str):
 
 def musa(a: str,b: int) -> List[str]:
     temp = "" #tempat sementara kata
-    listbaru = ["a" for i in range(b)] #list baru untuk string yang di split
+    listbaru = ["" for i in range(b)] #list baru untuk string yang di split
     x = 0
     for i in range(len(a)) : #dalam loop jika ada ",", " ", atau ";" maka akan dimasukan ke indeks pertama dst
         if a[i] == " " or a[i] == "," or a[i] == ";" or a[i] == "\n":
@@ -22,4 +22,3 @@ def musa(a: str,b: int) -> List[str]:
         else: #jika tidak yang lain maka akan dimasukan ke variabel temporary
             temp += str(a[i])
     return listbaru
-
