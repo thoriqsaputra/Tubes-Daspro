@@ -1,13 +1,13 @@
 from typing import List
 
-def masukinae(lis: List[str], word: str) -> List[str]:
+def addlist(lis: List[str], word: str) -> List[str]:
     for i in range(102):
         if lis[i] == "":
             lis[i] = word
             break
     return lis
 
-def musa(a: str,b: int) -> List[str]:
+def makeshift_split(a: str,b: int) -> List[str]:
     temp = "" #tempat sementara kata
     listbaru = ["" for i in range(b)] #list baru untuk string yang di split
     x = 0
