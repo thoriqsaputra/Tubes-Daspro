@@ -1,24 +1,31 @@
 from typing import List
 
-def addlist(lis: List[str], word: str) -> List[str]:
-    for i in range(102):
+def addlist(lis: List[str], kata: str,lenght: int) -> List[str]:
+    for i in range(lenght):
         if lis[i] == "":
-            lis[i] = word
+            lis[i] = kata
             break
     return lis
 
-def makeshift_split(a: str,b: int) -> List[str]:
+def addlistmatrix(lis: List[str], kata: str,lenght: int, index:int) -> List[str]:
+    for i in range(lenght):
+        if lis[i][index] == "":
+            lis[i][index] = kata
+            break
+    return lis
+
+def makeshift_split(kata: str,lenght: int) -> List[str]:
     temp = "" #tempat sementara kata
-    listbaru = ["" for i in range(b)] #list baru untuk string yang di split
+    listbaru = ["" for i in range(lenght)] #list baru untuk string yang di split
     x = 0
-    for i in range(len(a)) : #dalam loop jika ada ",", " ", atau ";" maka akan dimasukan ke indeks pertama dst
-        if a[i] == " " or a[i] == "," or a[i] == ";" or a[i] == "\n":
+    for i in range(len(kata)) : #dalam loop jika ada ",", " ", atau ";" maka akan dimasukan ke indeks pertama dst
+        if kata[i] == " " or kata[i] == "," or kata[i] == ";" or kata[i] == "\n":
             listbaru[x] = temp
             x +=1
             temp = ""
-        elif i == len(a) - 1 : #khusus untuk huruf terakhir 
-            temp += str(a[i])
+        elif i == len(kata) - 1 : #khusus untuk huruf terakhir 
+            temp += str(kata[i])
             listbaru[x] = temp
         else: #jika tidak yang lain maka akan dimasukan ke variabel temporary
-            temp += str(a[i])
+            temp += str(kata[i])
     return listbaru

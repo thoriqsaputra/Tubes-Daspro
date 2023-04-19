@@ -1,94 +1,114 @@
-from function import addlist, makeshift_split
+from function import addlist, makeshift_split, addlistmatrix
 from typing import List
 import os
 
-userpassrole = ["" for i in range(102)]
-candi = ["" for i in range(100)]
-bahan_bagunan = ["" for i in range(3)]
+userpassrole = ["" for i in range(102)] #deklarasi array of user data sesuai dengan template.
+candi = ["" for i in range(100)] #deklarasi array of candi sesuai dengan template.
+bahan_bagunan = ["" for i in range(3)] #deklarasi array of bahan bagunan sesuai dengan template.
+undo_jin = [["",""] for i in range(100)] #deklarasi array of jin yang telah dihapus.
+
+#masukin user data yang sudah ada ke array of user data.
 userpassrole[0] = "Bondowoso;cintaroro;bandung_bondowoso"
 userpassrole[1] = "Roro;gasukabondo;roro_jonggrang"
 
-def isuser(newuser: str) -> bool:
-    for i in range(101):
-        userlogin = makeshift_split(userpassrole[i], 3)
-        if newuser == userlogin[0]:
+
+# def jin_in_undo(jinhapus):
+#     indeksjin = 0
+#     for i in range(100):
+#         if undo_jin[i] == jinhapus:
+#             undo_jin[i] = ""
+#             indeksjin = i
+#             break
+#     for i in range(indeksjin+1,100):
+#         undo_jin[i-1] = undo_jin[i]
+        
+def isuser(newuser: str) -> bool: # Cek apakah user baru ada atau tidak dalam data user.
+    for i in range(102): # loop jumlah index data
+        userlogin = makeshift_split(userpassrole[i], 3) # user data displit ke dalam array baru
+        if newuser == userlogin[0]: # jika user baru ada maka return True
             return True
-    return False
+    return False # tidak terdapat maka False
 
-def login(logged: List[str]) -> List[str]:
+def login(logged: List[str]) -> List[str]: # log in ke akun yang sudah dibuat.
     
-
-    if logged[0] != "":
+    if logged[0] != "": # Apabila sudah ada yang login maka harus logout terlebih dahulu.
         print(f"Login gagal!\nAnda telah login dengan username {logged[0]}, silahkan lakukan “logout”\nsebelum melakukan login kembali.")
     
-    else:
+    else: # User belum login
 
-        while True:
-
-            user = input("Username: ")
+        while True: # Dalam loop agar dapat diulang jika terjadi kesalahan.
+            
+            user = input("Username: ") # User disuruh input username dan password yang sudah dibuat.
             pa55 = input("Password: ")
 
-            for i in range(102):
+            for i in range(102): # Cek apakah ada username dan password dalama array of user data.
 
-                userlogin = makeshift_split(userpassrole[i],3)
+                userlogin = makeshift_split(userpassrole[i],3) # Split user data dari template
 
-                if user == userlogin[0] and pa55 == userlogin[1]:
+                if user == userlogin[0] and pa55 == userlogin[1]: # Jika username dan password ada maka akan log in.
                     print(f"\nSelamat datang, {user} \nMasukkan command “help” untuk daftar command yang dapat kamu panggil")
-                    logged = [userlogin[0],userlogin[2], True]
+                    logged = [userlogin[0],userlogin[2], True] # Array of logged information
                     return logged
                 
-                elif user == userlogin[0] and pa55 != userlogin[1]:
+                elif user == userlogin[0] and pa55 != userlogin[1]: #jika pasword salah
                     print("\nPassword salah!")
                     break
             else:
-                print("Username tidak terdaftar!")
+                print("Username tidak terdaftar!") #jika username tidak ada 
 
-def logout(logged: List[str]) -> List[str]:
-    logged = ["","",False]
+def logout(logged: List[str]) -> List[str]: # log out dari akun
+    logged = ["","",False] # Array of logged information
     return logged
 
-def summonjin(logged: List[str]) -> List[str]:
-    if logged[1] == "bandung_bondowoso":
+def summonjin(logged: List[str]) -> List[str]: # Summon jin oleh Bondowoso
+    if logged[1] == "bandung_bondowoso": # Hanya Bondowoso yang dapat melakukan command ini.
     
         print("Jenis jin yang dapat dipanggil:\n (1) Pengumpul - Bertugas mengumpulkan bahan bangunan\n (2) Pembangun - Bertugas membangun candi\n")
 
-        while True:
+        while True:  # Loop 1 menentukan role jin.
 
-            jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
-
-            if jin == 1:
-                rolejin = "jin_pengumpul"
+            jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: ")) # Input jin yang mau dihapuskan.
+            
+            if jin == 1: # Memilih jin pengumpul. 
+                rolejin = "jin_pengumpul" # Menyimpan dalam sebuah variabel.
                 print("\nMemilih jin “Pengumpul”.\n")
                 break
-            elif jin == 2: 
-                rolejin = "jin_pembangun"
+            elif jin == 2: # Memilih jin pembangun.
+                rolejin = "jin_pembangun" # Menyimpan dalam sebuah variabel.
                 print("\nMemilih jin “Pembangun”.\n")
                 break
-            else:
+            else: # Selain dari jin pengumpul dan jin pembangun.
                 print(f"\nTidak ada jenis jin bernomor “{jin}”!\n")
 
-        while True:
+        while True: # Loop 2 menentukan username dan password jin.
 
-            userjin = input("Masukkan username jin: ")
+            userjin = input("Masukkan username jin: ") # Input username jin.
 
-            if isuser(userjin):
+            if isuser(userjin): # Cek apakah username jin sudah ada atau belum.
                 print(f"Username “{userjin}” sudah diambil!")
                 continue
             else:
-                while True:
-                    passjin = input("Masukkan password jin: ")
+                while True: # Loop 3 Menentukan password jin.
+                    passjin = input("Masukkan password jin: ") # Input password jin.
                     print("\nPassword panjangnya harus 5-25 karakter!\n")
-                    if not(5 <= len(passjin) <= 25):
+                    if not(5 <= len(passjin) <= 25): # Password harus sepanjang 5-25 kata.
                         continue
                     else:
-                        addlist(userpassrole, f"{userjin};{passjin};{rolejin}")            
+                        for i in range(1000):
+                            undojin = makeshift_split(undo_jin[i][0])
+                            if undo_jin[i] == jin:
+                                yesorno = input("Anda telah melakukan hapusjin dengan jin yang sama apakah mau ")
+
+                         
+                        addlist(userpassrole, f"{userjin};{passjin};{rolejin}",102) # Append data jin ke dalam array of user data.           
                         print(f"Mengumpulkan sesajen...\nMenyerahkan sesajen...\nMembacakan mantra...\n\n{userjin} berhasil dipanggil!")
                         return
     else:
         print("Hanya Bondowoso yang dapat mengakses command ini.")
 
-def hapusjin(logged: List[str]) -> List[str]:
-    if logged[1] == "bandung_bondowoso":
+def hapusjin(logged: List[str]) -> List[str]: # Menghilangkan Jin.
+
+    if logged[1] == "bandung_bondowoso":  # Hanya Bondowoso yang dapat melakukan command ini.
         while True:
 
             jinhapus = input("Masukkan username jin : ")
@@ -100,6 +120,7 @@ def hapusjin(logged: List[str]) -> List[str]:
                         for i in range(101):
                             userlogin = makeshift_split(userpassrole[i], 3)
                             if jinhapus == userlogin[0]:
+                                addlistmatrix(undo_jin, jinhapus, 1000, 0)
                                 userpassrole[i] = ""
                                 print("\nJin telah berhasil dihapus dari alam gaib.")
                         return
@@ -172,3 +193,5 @@ def save():
     file_user.close()
     file_candi.close()
     file_bahan_bangunan.close()
+
+# def undo():
