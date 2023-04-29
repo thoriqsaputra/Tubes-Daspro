@@ -2,7 +2,7 @@ from typing import List
 
 def addlist(lis: List[str], kata: str,lenght: int) -> List[str]:
     for i in range(lenght):
-        if lis[i] == "":
+        if lis[i][0] == "":
             lis[i] = kata
             break
     return lis
@@ -10,7 +10,7 @@ def addlist(lis: List[str], kata: str,lenght: int) -> List[str]:
 def addlistmatrix(lis: List[str], kata: str,lenght: int, index:int) -> List[str]:
     for i in range(lenght):
         if lis[i][index] == "":
-            lis[i][index] = kata
+            lis[i] = kata
             break
     return lis
 

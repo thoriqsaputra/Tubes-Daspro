@@ -11,7 +11,6 @@ undo_jin = [["",""] for i in range(100)] #deklarasi array of jin yang telah diha
 userpassrole[0] = "Bondowoso;cintaroro;bandung_bondowoso"
 userpassrole[1] = "Roro;gasukabondo;roro_jonggrang"
 
-
 # def jin_in_undo(jinhapus):
 #     indeksjin = 0
 #     for i in range(100):
@@ -96,10 +95,20 @@ def summonjin(logged: List[str]) -> List[str]: # Summon jin oleh Bondowoso
                     else:
                         for i in range(1000):
                             undojin = makeshift_split(undo_jin[i][0])
-                            if undo_jin[i] == jin:
-                                yesorno = input("Anda telah melakukan hapusjin dengan jin yang sama apakah mau ")
+                            if undojin[i] == jin:
+                                while True:
+                                    yesorno = input("Anda telah melakukan hapusjin dengan jin yang sama apakah mau melakukan undo sampai jin tersebut terkembalikan?\n (Y) Melakukan undo\n (N) Membuat akun jin baru.")
 
-                         
+                                    if yesorno == "Y":
+                                        undo()
+                                        return
+                                    elif yesorno == "N":
+                                        addlist(userpassrole, f"{userjin};{passjin};{rolejin}",102) # Append data jin ke dalam array of user data.           
+                                        print(f"Mengumpulkan sesajen...\nMenyerahkan sesajen...\nMembacakan mantra...\n\n{userjin} berhasil dipanggil!")
+                                        return
+                                    else:
+                                        print("\nUlang kembali anda salah input.\n")
+
                         addlist(userpassrole, f"{userjin};{passjin};{rolejin}",102) # Append data jin ke dalam array of user data.           
                         print(f"Mengumpulkan sesajen...\nMenyerahkan sesajen...\nMembacakan mantra...\n\n{userjin} berhasil dipanggil!")
                         return
@@ -111,20 +120,22 @@ def hapusjin(logged: List[str]) -> List[str]: # Menghilangkan Jin.
     if logged[1] == "bandung_bondowoso":  # Hanya Bondowoso yang dapat melakukan command ini.
         while True:
 
-            jinhapus = input("Masukkan username jin : ")
+            jinhapus = input("Masukkan username jin : ") # Input username jin.
 
-            if isuser(jinhapus):
+            if isuser(jinhapus): # Cek apakah username jin terdapat dalam user data, dan menghasilkan True.
                 while True: 
+                    # User disuruh input antara Y atau N dalam penghapusan jin.
                     yesno = input(f"Apakah anda yakin ingin menghapus jin dengan username {jinhapus} (Y/N)? ")
-                    if yesno == "Y":
+                    if yesno == "Y": #jika iya maka akan di hapus
                         for i in range(101):
-                            userlogin = makeshift_split(userpassrole[i], 3)
+                            userlogin = makeshift_split(userpassrole[i], 3) # Split array of userdata[i]
                             if jinhapus == userlogin[0]:
-                                addlistmatrix(undo_jin, jinhapus, 1000, 0)
-                                userpassrole[i] = ""
+                                addlistmatrix(undo_jin, jinhapus, 1000, 0) # Masukkan jin dalam array of undo jin.
+                                userpassrole[i] = "" # diubah jadi ""
                                 print("\nJin telah berhasil dihapus dari alam gaib.")
                         return
-                    elif yesno == "N":
+                    
+                    elif yesno == "N": # Jika tidak, maka akan keluar dari bagian ini.
                         break
                     else:
                         print("Pilih antara Y atau N.")
@@ -162,27 +173,29 @@ def ubahjin(logged: List[str]) -> List[str]:
                     print("Jin telah berhasil diubah.")
     else:
         print("Hanya Bondowoso yang dapat mengakses command ini.")   
-         
+
 def save():
-    folder_name = input("Masukkan Nama folder: ")
+    folder_name = input("Masukkan Nama folder: ") # Input nama folder
     
-    if not os.path.exists(f"save/{folder_name}"):
+    if not os.path.exists(f"save/{folder_name}"): # Jika folder tidak dapat ditemukan.
         
-        if not os.path.exists("save"):
-            os.mkdir("save")
+        if not os.path.exists("save"): # Jika tidak ada folder save, maka akan di buat folder save dan folder yang diinginkan.
+            os.mkdir("save") 
             os.mkdir(f"save/{folder_name}")
             print("\nSaving...\n")
-        else:
+        else: # Folder save sudah ada.
             print(f"\nSaving...\n\nMembuat folder save/{folder_name}...\n\nBerhasil menyimpan data di folder save/{folder_name}!")
             os.mkdir(f"save/{folder_name}")
 
-    else:
+    else: # folder yang diinginkan ada.
         print(f"\nSaving...\n\nBerhasil menyimpan data di folder save/{folder_name}!")
 
-    file_user = open(f"save/{folder_name}/user.csv","w")
+    # Membuka file csv tempat penyimpanan data.
+    file_user = open(f"save/{folder_name}/user.csv","w") 
     file_candi = open(f"save/{folder_name}/candi.csv","w")
     file_bahan_bangunan = open(f"save/{folder_name}/bahan_bangunan.csv","w")
 
+    # Memasukkan data dalam file csv.
     for i in range(102):
         file_user.write(f"{userpassrole[i]}\n")
     for i in range(100):
@@ -190,8 +203,18 @@ def save():
     for i in range(3):
         file_bahan_bangunan.write(f"{bahan_bagunan[i]}\n")
     
+    # Folder ditutup setelah diwrite.
     file_user.close()
     file_candi.close()
     file_bahan_bangunan.close()
 
-# def undo():
+def undo():
+    index = 0
+    while undo_jin[index][0] != "":
+        index += 1
+        if index == 100:
+            return("Anda harus melakukan penghapusan jin terlebih dahulu jika ingin melakukan undo.")
+    addlist(userpassrole,undo_jin[index][0], 102)
+    addlist(candi,undo_jin[index][1], 100)
+    undo_jin[index][0], undo_jin[index][1] = "", ""
+
