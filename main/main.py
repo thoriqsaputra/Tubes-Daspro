@@ -22,7 +22,7 @@ message1 = """
                     █░░║║║╠─║─║─║║║║║╠─░░█
                     █░░╚╩╝╚╝╚╝╚╝╚╝╩─╩╚╝░░█
 """
-message2 = "Permainan dimulai! Gunakan command 'help' untuk melihat daftar command yang ada.\n"
+message2 = "Permainan dimulai! Gunakan command 'help' untuk melihat daftar command yang ada."
 
 for i in range(len(message1)):
     print(message1[i], end='', flush=True)
@@ -35,10 +35,10 @@ print()
 
 # Loop permainan 
 while True:
-    cmd = input(">>> ")
+    cmd = input("\n>>> ")
 
     if logged[1] == "" and cmd != "logout" and cmd != "login" and cmd != "help" and cmd != "exit":
-        print('\nAnda belom Login atau salah input, gunakan command "help" untuk menampilkan daftar command.\n')
+        print('ada belom Login atau salah input, gunakan command "help" untuk menampilkan daftar command.')
     elif cmd == "login":
         logged = spesifikasi.login(logged)
     elif cmd == "logout":
@@ -75,4 +75,3 @@ while True:
         spesifikasi.summonjinplus(logged)
     else:
         print('Input anda salah, gunakan command "help" untuk menampilkan daftar command.')
-

@@ -18,13 +18,13 @@ def jumlah_targetList (targetList: List[str], matrix: List[List[str]], index: in
 def jumlah_column (column: List[str]) -> int: # menghitung jumlah kolom yang terisi, selain None dan 0
     jumlah_data = 0
     for i in range(1000):
-        if column[i] != None and column[i] != "":
+        if column[i] != "":
             jumlah_data += 1
     return jumlah_data
 
 def arr_target (target, array, column1, column2) -> list: # membuat suatu array yang berisi target dari 2 kolom,
     # contoh seperti array baru dari kolom role sebagain "jin_pembangun" yang berupa nama namanya dari kolom "username"
-    arr_target = [None for i in range(jumlah_target (target, array, column2))]
+    arr_target = ["" for i in range(jumlah_target (target, array, column2))]
     j = 0
     for i in range(100):
         if array[i][column2] == target:

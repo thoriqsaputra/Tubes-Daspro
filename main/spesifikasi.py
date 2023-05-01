@@ -54,11 +54,11 @@ def login(logged: List[str]) -> List[str]: # login ke akun yang sudah dibuat.
 # F02 Logout
 def logout(logged: List[str]) -> List[str]: # log out dari akun
     if logged[1] == "": # Jika belum ada yang login
-        print("\nLogout gagal!\n\nAnda belum login, silahkan login terlebih dahulu sebelum melakukan logout\n")
+        print("\nLogout gagal!\n\nAnda belum login, silahkan login terlebih dahulu sebelum melakukan logout")
         return logged
     else:
         logged = ["",""] # Array of logged information
-        print("\nLogout berhasil!\n")
+        print("\nLogout berhasil!")
         return logged
 
 # F03 Summon Jin
@@ -66,8 +66,9 @@ def summonjin(logged: List[str]) -> List[str]: # Summon jin oleh Bondowoso
     if logged[1] == "bandung_bondowoso": # Hanya Bondowoso yang dapat melakukan command ini.
         
         jumlah_jin = function.jumlah_targetList (["jin_pembangun","jin_pengumpul"], userpassrole, 2)
+
         if jumlah_jin >= 100:
-            print("\nJumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu\n")
+            print("Jumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu")
             return
         else:
             print("Jenis jin yang dapat dipanggil:\n (1) Pengumpul - Bertugas mengumpulkan bahan bangunan\n (2) Pembangun - Bertugas membangun candi\n")
@@ -94,7 +95,7 @@ def summonjin(logged: List[str]) -> List[str]: # Summon jin oleh Bondowoso
                     continue
                 for i in range(102): # loop jumlah index data
                     if userjin == userpassrole[i][0]: # jika user baru ada maka return True
-                        print(f"\nUsername “{userjin}” sudah diambil!\n")
+                        print(f"\nUsername “{userjin}” sudah diambil!")
                         break
 
                 else: # username belum ada
@@ -121,10 +122,10 @@ def summonjin(logged: List[str]) -> List[str]: # Summon jin oleh Bondowoso
                             return
                     
     else:
-        print("Hanya Bondowoso yang dapat mengakses command ini.")
+        print("\nHanya Bandung Bondowoso yang dapat mengakses command ini.")
 
 # F04 Hilangkan Jin
-def hapusjin(logged: List[str]) -> List[str]: # Menghilangkan Jin.
+def hapusjin(logged: List[str]) -> List[str]: # Menghilangkan Jin.  
     if logged[1] == "bandung_bondowoso":  # Hanya Bondowoso yang dapat melakukan command ini.
 
         jinhapus = input("\nMasukkan username jin : ") # Input username jin.
@@ -134,7 +135,7 @@ def hapusjin(logged: List[str]) -> List[str]: # Menghilangkan Jin.
                 while True: 
                     # User disuruh input antara Y atau N dalam penghapusan jin.
                     yesno = input(f"Apakah anda yakin ingin menghapus jin dengan username {jinhapus} (Y/N)? ")
-                    if yesno == "Y": #jika iya maka akan di hapus
+                    if yesno == "Y" or yesno == "y": #jika iya maka akan di hapus
                         for i in range(102):
                             if jinhapus == userpassrole[i][0]:
                                 userpassrole[i] = ["","",""] # diubah jadi ""
@@ -148,14 +149,15 @@ def hapusjin(logged: List[str]) -> List[str]: # Menghilangkan Jin.
                                 air[i] = ""
                         return
                     
-                    elif yesno == "N": # Jika tidak, maka akan keluar dari bagian ini.
-                        return("\nJin tidak jadi dihapus.\n")                        
+                    elif yesno == "N" or yesno == "n": # Jika tidak, maka akan keluar dari bagian ini.
+                        print("\nJin tidak jadi dihapus.")                        
+                        return
                     else:
                         print("\nPilih antara Y atau N.\n")
         else:
-            print("\nTidak ada jin dengan username tersebut.\n")
+            print("\nTidak ada jin dengan username tersebut.")
     else:
-        print("Hanya Bondowoso yang dapat mengakses command ini.")
+        print("\nHanya Bandung Bondowoso yang dapat mengakses command ini.")
 
 # F05 Ubah Tipe Jin
 def ubahjin(logged: List[str]) -> List[str]:
@@ -189,7 +191,7 @@ def ubahjin(logged: List[str]) -> List[str]:
                 else:
                     print("\nPilih antara Y atau N.\n")
     else:
-        print("Hanya Bondowoso yang dapat mengakses command ini.")  #kondisi dimana user yang login bukan merupakan bandung bondowoso
+        print("\nHanya Bandung Bondowoso yang dapat mengakses command ini.")  #kondisi dimana user yang login bukan merupakan bandung bondowoso
 
 # F06 Jin Pembangun
 def bangun(logged: List[str]):
@@ -201,7 +203,7 @@ def bangun(logged: List[str]):
        
         if butuh_pasir > bahan_bangunan[0][2] or butuh_batu > bahan_bangunan[1][2] or butuh_air > bahan_bangunan[2][2]: # Apabila salah satu dari pasir, batu, dan air yang dibutuhkan lebih banyak dari yang dimiliki, maka candi tidak bisa dibangun
             print("\nBahan bangunan tidak mencukupi.")
-            print("Candi tidak bisa dibangun!\n")
+            print("Candi tidak bisa dibangun!")
 
         else:
             candii = """
@@ -226,7 +228,7 @@ def bangun(logged: List[str]):
 
             idx = 0
             for i in range (1000):
-                if id[i] == None or id[i] == "": # Untuk mengecek array id yang kosong
+                if id[i] == "": # Untuk mengecek array id yang kosong
                     idx = i # Untuk menyimpan indeksnya
                     break
 
@@ -241,7 +243,7 @@ def bangun(logged: List[str]):
             print("Candi berhasil dibangun.")
             print(f"Sisa candi yang perlu dibangun: {100-jumlah_pembuat}.")
     else:
-        print("Hanya Jin Pembangun yang dapat menggunakan command tersebut.")
+        print("\nHanya Jin Pembangun yang dapat menggunakan command tersebut.")
 
 # F07 Jin Pengumpul
 def kumpul(logged: List[str]):
@@ -254,10 +256,10 @@ def kumpul(logged: List[str]):
         bahan_bangunan[0][2] += kumpul_pasir # Untuk memasukkan pasir yang telah dikumpulkan kedalam array
         bahan_bangunan[1][2] += kumpul_batu # Untuk memasukkan batu yang telah dikumpulkan kedalam array
         bahan_bangunan[2][2] += kumpul_air # Untuk memasukkan air yang telah dikumpulkan kedalam array
-        print(f"\nJin menemukan {kumpul_pasir} pasir, {kumpul_batu} batu, dan {kumpul_air} air.\n")
+        print(f"\nJin menemukan {kumpul_pasir} pasir, {kumpul_batu} batu, dan {kumpul_air} air.")
 
     else:
-        print("Hanya Jin Pengumpul yang dapat menggunakan command tersebut.")
+        print("\nHanya Jin Pengumpul yang dapat menggunakan command tersebut.")
 
 # F08 Batch Bangun
 def batchbangun(logged: List[str]) -> List[str]:
@@ -280,7 +282,7 @@ def batchbangun(logged: List[str]) -> List[str]:
         
             for i in range(jumlah_jin_pembangun): # looping untuk jumlah candi yang akan dibangun untuk 1 candi per jin pembangun
                 for j in range(1000): # looping untuk melakukan cek data apakah id candi tertentu sudah dibuat (pake patokan pembuat karena kalo id masih ada kemungkinan id 0)
-                    if pembuat[j] == None or pembuat[j] == "": # kalo pembuatnya masih none berarti itu belum ada candi yang dibangun untuk id tersebut
+                    if pembuat[j] == "": # kalo pembuatnya masih none berarti itu belum ada candi yang dibangun untuk id tersebut
                         break
                     
                 id[j] = j # id nya tercetak
@@ -324,7 +326,7 @@ def batchbangun(logged: List[str]) -> List[str]:
 
                 print(f"Bahan bangunan yang tersedia hanya sebanyak {bahan_bangunan[0][2]} pasir, {bahan_bangunan[1][2]} batu, dan {bahan_bangunan[2][2]} air.")
 
-                for i in range(j, (j-jumlah_jin_pembangun), -1): # looping kalo misal ada bahan yang kurang, candi gajadi dibangun, balikin filenya jadi None sama 0
+                for i in range(j, (j-jumlah_jin_pembangun), -1): # looping kalo misal ada bahan yang kurang, candi gajadi dibangun, balikin filenya jadi kosong sama 0
                     id[i] = ""
                     pembuat[i] = ""
                     pasir[i] = ""
@@ -358,11 +360,11 @@ def batchbangun(logged: List[str]) -> List[str]:
                 else:
                     jumlah_candi = jumlah_pembuat2 - jumlah_pembuat1
 
-                print(f"\nJin berhasil membangun total {jumlah_candi} candi.")
+                print(f"Jin berhasil membangun total {jumlah_candi} candi.")
                 print(f"Sisa bahan bangunan sebanyak {bahan_bangunan[0][2]} pasir, {bahan_bangunan[1][2]} batu, dan {bahan_bangunan[2][2]} air.") # kreativitas
 
     else:
-        print("Hanya Bondowoso yang dapat mengakses command ini.")
+        print("Hanya Bandung Bondowoso yang dapat mengakses command ini.")
 
 # F08 Batch Kumpul
 def batchkumpul(logged: List[str]) -> List[str]:
@@ -370,7 +372,7 @@ def batchkumpul(logged: List[str]) -> List[str]:
     jumlah_jin_pengumpul = function.jumlah_target ("jin_pengumpul", userpassrole, 2) 
     if logged[1] == "bandung_bondowoso":
         if jumlah_jin_pengumpul == 0: # kondisi kalo tidak ada jin pengumpul
-            print("\nKumpul gagal. Anda tidak punya jin pengumpul. Silahkan summon terlebih dahulu\n")
+            print("Kumpul gagal. Anda tidak punya jin pengumpul. Silahkan summon terlebih dahulu")
 
         else: # kondisi kalo ada jin pengumpul
             # deklarasi jumlah pasir batu air yang dikumpulkan dalam satu sesi command
@@ -389,10 +391,10 @@ def batchkumpul(logged: List[str]) -> List[str]:
             bahan_bangunan[2][2] += total_air_kumpul
 
             # output 
-            print("\nMengerahkan %d jin untuk mengumpulkan bahan." %jumlah_jin_pengumpul)
+            print("Mengerahkan %d jin untuk mengumpulkan bahan." %jumlah_jin_pengumpul)
             print(f"Jin menemukan total {total_pasir_kumpul} pasir, {total_batu_kumpul} batu, dan {total_air_kumpul} air")
     else:
-        print("\nHanya Bondowoso yang dapat mengakses command ini.\n")
+        print("Hanya Bondowoso yang dapat mengakses command ini.")
 
 # F09 Ambil Laporan Jin
 def laporanjin(logged: List[str]) -> List[str]:
@@ -450,10 +452,11 @@ def laporanjin(logged: List[str]) -> List[str]:
         return (jin_termalas, jin_terajin)
     
     else:
-        print("Hanya Bondowoso yang dapat mengakses command ini.")
+        print("Hanya Bandung Bondowoso yang dapat mengakses command ini.")
 
 # F10 Ambil Laporan Candi
 def laporancandi(logged: List[str]) -> List[str]:
+    
     jumlah_pembuat = function.jumlah_column(pembuat) # jumlah jin yang sudah membangun candi
 
     if logged[1] == "bandung_bondowoso":
@@ -488,7 +491,7 @@ def laporancandi(logged: List[str]) -> List[str]:
                 if harga_candi[i] >= candi_termahal:
                     candi_termahal = harga_candi[i]
                     id_candi_termahal = i
-                elif harga_candi[i] <= candi_termurah:
+                else:
                     candi_termurah = harga_candi[i]
                     id_candi_termurah = i
 
@@ -503,27 +506,28 @@ def laporancandi(logged: List[str]) -> List[str]:
         return (candi_termurah, candi_termahal)
     
     else:
-        print("Hanya Bondowoso yang dapat mengakses command ini.")
+        print("Hanya Bandung Bondowoso yang dapat mengakses command ini.")
 
 # F11 Hancurkan Candi
 def hancurkancandi(logged: List[str]) -> List[str]:
-
     if logged[1] == "roro_jonggrang":
 
-        id_hancur = input("Masukkan ID candi: ") # input id candi yang mau dihancurin
+        id_hancur = int(input("Masukkan ID candi: ")) # input id candi yang mau dihancurin
         check_hancur = 0
 
         for i in range(1000): # looping untuk ngecek ada ga id candi yang mau diancurin sama dengan yang di array id
-            if id_hancur == id[i]:
+            if id[i] == "":
+                continue
+            if id_hancur == int(id[i]):
                 check_hancur += 1
                 break
 
         if check_hancur > 0: # kondisi kalo cek hancurnya lebih dari 0 (1) tandanya ada yg sama di array id
-            YN = input("Apakh anda yakin ingin menghancurkan candi ID: %d (Y/N)? " %int(id_hancur))
+            YN = input("Apakah anda yakin ingin menghancurkan candi ID: %d (Y/N)? " %int(id_hancur))
 
-            while YN != "Y" and "N": # kondisi kalo pilihan yang ditulis bukan Y atau N
-                print("\nTidak ada pilihan tersebut.")
-                YN = input("Apakh anda yakin ingin menghancurkan candi ID: %d (Y/N)? " %int(id_hancur))
+            while YN != "Y" and YN != "N": # kondisi kalo pilihan yang ditulis bukan Y atau N
+                print("Tidak ada pilihan tersebut.\n")
+                YN = input("Apakah anda yakin ingin menghancurkan candi ID: %d (Y/N)? " %int(id_hancur))
 
             if YN == "Y": # kondisi kalo udh inputnya Y
                 id[i] = ""
@@ -531,22 +535,23 @@ def hancurkancandi(logged: List[str]) -> List[str]:
                 pasir[i] = ""
                 batu[i] = ""
                 air[i] = ""
-                print("\nCandi telah berhasil dihancurkan.")
+                print("Candi telah berhasil dihancurkan.")
 
             else: # kondisi kalo dia jawabnya N
-                print("\nCandi tidak jadi dihancurkan.")
+                print("Candi tidak jadi dihancurkan.")
 
         else: # kondisi kalo gaada id yang mau diancurin sama dengan array id
-            print("\nTidak ada candi dengan ID tersebut.")
+            print("Tidak ada candi dengan ID tersebut.\n")
             hancurkancandi (logged)
 
         return
     
     else:
-        print("Hanya Roro yang dapat mengakses command ini.")
+        print("Hanya Roro Jonggrang yang dapat mengakses command ini.")
 
 # F12 Ayam Berkokok
 def ayamberkokok(logged: List[str]):
+    
     jumlah_pembuat = function.jumlah_column(pembuat)
 
     if logged[1] == "roro_jonggrang": # Hanya role Roro Jonggrang yang dapat menggunakan command ini
@@ -705,7 +710,7 @@ def helps(logged: List[str]):
         print("8. laporancandi \nUntuk mengambil laporan candi untuk mengetahui progress pembangunan candi")
         print("9. save \nUntuk menjalankan prosedur menyimpan data yang berada di program")
         print("10. exit \nUntuk keluar dari program dan kembali ke terminal")
-        print("11. summonjinplus \nUntuk mengsummon jin lebih dari 1 kali.")
+        print("11. summonjinplus \nUntuk mensummon jin lebih dari 1 kali.")
 
 
     elif logged[1] == "roro_jonggrang": # Output untuk role Roro Jonggrang
@@ -736,10 +741,11 @@ def exit_game():
     check1 = True #batas awal untuk pengecekan apakah command berjalan sesuai / tidak
     while (check1 == True): #memasuki looping selama kondisi batas (check1 masih bernilai True)
         #input untuk memvalidasi pilihan pengguna, apakah mau men-save file yang sudah diupdate atau tidak
-        validasi = str(input("\nApakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) ")) 
+        validasi = str(input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) ")) 
         if (validasi.lower()== "n" or validasi.lower()== "y"): #kondisi ke-2 untuk memastikan user hanya menginput nilai y dan n
             if (validasi.lower()=="y"): #kondisi 3, jika user setuju untuk save sebelum melakukan exit
                 save() #memanggil procedure save
+                check1 = False
             else:
                 check1 = False #batasan berubah nilai karena ada command yang tidak terpenuhi
         elif not (validasi.lower()== "n" or validasi.lower()== "y"): #kondisional 
@@ -756,10 +762,12 @@ def summonjinplus(logged: List[str]):
 
     if logged[1] == "bandung_bondowoso": # Hanya Bondowoso yang dapat melakukan command ini. 
          # input jumlah jin yang ingin disummon
-        banyakjin = int(input("Banyak jin yang ingin disummon: "))
+
+        banyakjin = int(input("Banyak jin yang ingin di summon: "))
+
         jumlah_jin = function.jumlah_targetList (["jin_pembangun","jin_pengumpul"], userpassrole, 2)
         if jumlah_jin + banyakjin > 100: # tidak boleh melebihi jumlah maks jin
-            print("\nSummon gagal! Anda melebihi batas maks summonjin.\n")
+            print("\nSummon gagal! Anda melebihi batas maks summonjin.")
             return
         
         else:
@@ -804,7 +812,7 @@ def summonjinplus(logged: List[str]):
             for i in range(3):
                 print(".", end="", flush=True)
                 time.sleep(0.4)
-            print(f"\n\n{banyakjin} jin berhasil dipanggil!\n")
+            print(f"\n\n{banyakjin} jin berhasil dipanggil!")
             return
     else:
-        print("Hanya Bondowoso yang dapat mengakses command ini.")
+        print("Hanya Bandung Bondowoso yang dapat mengakses command ini.")
