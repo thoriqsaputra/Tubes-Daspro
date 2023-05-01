@@ -66,9 +66,8 @@ def summonjin(logged: List[str]) -> List[str]: # Summon jin oleh Bondowoso
     if logged[1] == "bandung_bondowoso": # Hanya Bondowoso yang dapat melakukan command ini.
         
         jumlah_jin = function.jumlah_targetList (["jin_pembangun","jin_pengumpul"], userpassrole, 2)
-        print(jumlah_jin)
         if jumlah_jin >= 100:
-            print("Jumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu")
+            print("\nJumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu\n")
             return
         else:
             print("Jenis jin yang dapat dipanggil:\n (1) Pengumpul - Bertugas mengumpulkan bahan bangunan\n (2) Pembangun - Bertugas membangun candi\n")
@@ -95,7 +94,7 @@ def summonjin(logged: List[str]) -> List[str]: # Summon jin oleh Bondowoso
                     continue
                 for i in range(102): # loop jumlah index data
                     if userjin == userpassrole[i][0]: # jika user baru ada maka return True
-                        print(f"Username “{userjin}” sudah diambil!")
+                        print(f"\nUsername “{userjin}” sudah diambil!\n")
                         break
 
                 else: # username belum ada
@@ -118,7 +117,7 @@ def summonjin(logged: List[str]) -> List[str]: # Summon jin oleh Bondowoso
                             for i in range(3):
                                 print(".", end="", flush=True)
                                 time.sleep(0.4)
-                            print(f"\n{userjin} berhasil dipanggil!")
+                            print(f"\n\nJin {userjin} berhasil dipanggil!")
                             return
                     
     else:
@@ -215,7 +214,7 @@ def bangun(logged: List[str]):
   ╒▄█▌▄▄▄▄▄▄▄▄▄█▄⌐
   █▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-"""
+ """
             for i in range (len(candii)):
                 print(candii[i], end="", flush=True)
                 time.sleep(0.02)
@@ -323,7 +322,7 @@ def batchbangun(logged: List[str]) -> List[str]:
                 else: # kondisi kalo yang kurang itu pasir batu air
                     print(f"Bangun gagal. Kurang {kurang_pasir} pasir, {kurang_batu} batu, dan {kurang_air} air.")
 
-                print(f"Sisa bahan bangunan sebanyak {bahan_bangunan[0][2]} pasir, {bahan_bangunan[1][2]} batu, dan {bahan_bangunan[2][2]} air.")
+                print(f"Bahan bangunan yang tersedia hanya sebanyak {bahan_bangunan[0][2]} pasir, {bahan_bangunan[1][2]} batu, dan {bahan_bangunan[2][2]} air.")
 
                 for i in range(j, (j-jumlah_jin_pembangun), -1): # looping kalo misal ada bahan yang kurang, candi gajadi dibangun, balikin filenya jadi None sama 0
                     id[i] = ""
@@ -347,7 +346,7 @@ def batchbangun(logged: List[str]) -> List[str]:
   ╒▄█▌▄▄▄▄▄▄▄▄▄█▄⌐
   █▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-"""
+ """
                 for i in range (len(candii)):
                     print(candii[i], end="", flush=True)
                     time.sleep(0.02)
@@ -408,8 +407,8 @@ def laporanjin(logged: List[str]) -> List[str]:
         # deklarasi cek jin terajin termalas
         check_terajin = 0
         check_termalas = 0
-        jin_terajin = ""
-        jin_termalas = ""
+        jin_terajin = "-"
+        jin_termalas = "-"
 
         for i in range(jumlah_jin_pembangun):
             x = 0
@@ -552,7 +551,7 @@ def ayamberkokok(logged: List[str]):
 
     if logged[1] == "roro_jonggrang": # Hanya role Roro Jonggrang yang dapat menggunakan command ini
 
-        if jumlah_pembuat == 100: # Apabila jumlah candi mencapai 100 maka Bandung Bondowoso akan memenangkan permainan
+        if jumlah_pembuat >= 100: # Apabila jumlah candi mencapai 100 maka Bandung Bondowoso akan memenangkan permainan
 
             print("Kukuruyuk.. Kukuruyuk..\n")
             print("Jumlah Candi: 100\n")
@@ -619,7 +618,7 @@ def load(foldername: str): # transfer data dari file csv ke dalam array/matrix
 # F14 Save
 def save():
 
-    folder_name = input("Masukkan Nama folder: ") # Input nama folder
+    folder_name = input("Masukkan nama folder: ") # Input nama folder
     
     if not os.path.exists(f"save/{folder_name}"): # Jika folder tidak dapat ditemukan.
         
@@ -627,7 +626,7 @@ def save():
             os.mkdir("save") 
             os.mkdir(f"save/{folder_name}")
             # print text saving
-            print(f"Making folder save and {folder_name}", end="")
+            print(f"\nMembuat folder save dan {folder_name}", end="")
             for i in range(4):
                 print(".",end="",flush = True)
                 time.sleep(0.5)
@@ -642,7 +641,7 @@ def save():
         else: # Folder save sudah ada.
             os.mkdir(f"save/{folder_name}")
             # print text saving
-            print(f"Making folder {folder_name}", end="")
+            print(f"\nMembuat folder {folder_name}", end="")
             for i in range(4):
                 print(".",end="",flush = True)
                 time.sleep(0.5)
@@ -655,7 +654,7 @@ def save():
             print(f"\nBerhasil menyimpan data di folder save/{folder_name}!")
 
     else: # folder yang diinginkan ada.
-        print(f"Finding folder {folder_name}", end="")
+        print(f"\nMencari folder {folder_name}", end="")
         # print text saving
         for i in range(4):
             print(".",end="",flush = True)
@@ -675,7 +674,7 @@ def save():
 
     # Memasukkan data dalam file csv.
     for i in range(102):
-        file_user.write(f"{userpassrole[i][0]};{userpassrole[i][1]};{userpassrole[i][0]}\n")
+        file_user.write(f"{userpassrole[i][0]};{userpassrole[i][1]};{userpassrole[i][2]}\n")
     for i in range(100):
         file_candi.write(f"{id[i]};{pembuat[i]};{pasir[i]};{batu[i]};{air[i]}\n")
     for i in range(3):
@@ -760,11 +759,11 @@ def summonjinplus(logged: List[str]):
         banyakjin = int(input("Banyak jin yang ingin disummon: "))
         jumlah_jin = function.jumlah_targetList (["jin_pembangun","jin_pengumpul"], userpassrole, 2)
         if jumlah_jin + banyakjin > 100: # tidak boleh melebihi jumlah maks jin
-            print("Summon gagal! Anda melebihi batas maks summonjin.")
+            print("\nSummon gagal! Anda melebihi batas maks summonjin.\n")
             return
         
         else:
-            print("Jenis jin yang dapat dipanggil:\n (1) Pengumpul - Bertugas mengumpulkan bahan bangunan\n (2) Pembangun - Bertugas membangun candi\n")
+            print("\nJenis jin yang dapat dipanggil:\n (1) Pengumpul - Bertugas mengumpulkan bahan bangunan\n (2) Pembangun - Bertugas membangun candi\n")
 
             while True:  # Loop 1 menentukan role jin.
 
@@ -805,7 +804,7 @@ def summonjinplus(logged: List[str]):
             for i in range(3):
                 print(".", end="", flush=True)
                 time.sleep(0.4)
-            print(f"\n{banyakjin} jin berhasil dipanggil!\n")
+            print(f"\n\n{banyakjin} jin berhasil dipanggil!\n")
             return
     else:
         print("Hanya Bondowoso yang dapat mengakses command ini.")
