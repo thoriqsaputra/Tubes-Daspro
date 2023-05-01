@@ -1,17 +1,24 @@
+# Import module yang dibutuhkan
 from typing import List
-from spesifikasi import *
 
-def jumlah_target (target, array, index) -> int: # menghitung jumlah variabel dari 1 kolom seperti "jin_pembangun" dari kolom role
+def jumlah_target (target: str, matrix: List[List[str]], index: int) -> int: # menghitung jumlah variabel dari 1 kolom seperti "jin_pembangun" dari kolom role
     jumlah_variabel = 0
-    for i in range(100):
-        if array[i][index] == target:
+    for i in range(102):
+        if matrix[i][index] == target:
             jumlah_variabel += 1
     return jumlah_variabel
 
-def jumlah_column (column) -> int: # menghitung jumlah kolom yang terisi, selain None dan 0
+def jumlah_targetList (targetList: List[str], matrix: List[List[str]], index: int) -> int: # menghitung jumlah variabel dari 1 kolom seperti "jin_pembangun" dari kolom role
+    jumlah_variabel = 0
+    for i in range(102):
+        if matrix[i][index] == targetList[0] or matrix[i][index] == targetList[1]:
+            jumlah_variabel += 1
+    return jumlah_variabel
+
+def jumlah_column (column: List[str]) -> int: # menghitung jumlah kolom yang terisi, selain None dan 0
     jumlah_data = 0
-    for i in range(100):
-        if column[i] != None and column[i] != 0:
+    for i in range(1000):
+        if column[i] != None and column[i] != "":
             jumlah_data += 1
     return jumlah_data
 
@@ -43,22 +50,19 @@ def lcg_15(seed): # rng untuk 1 - 5
         x = (a * x + c) % m
         yield (x % 5) + 1
 
-def addlist(lis: List[str], kata: str,lenght: int) -> List[str]:
-    for i in range(lenght):
-        if lis[i] == "":
-            lis[i] = kata
-            break
-    return lis
-
 def addlistmatrix(lis: List[str], lenght: int, kolom: int, lisword: List[str]) -> List[str]:
+    # Menambahkan kata dalam array
     idx = 0
     for i in range(lenght):
         if lis[i][0] == "":
             idx = i
-        for i in range(kolom):
-            lis[idx][i] = lisword[i]
-        return lis
-    return("Sudah penuh")        
+            break
+    else:
+        return("Sudah penuh")  
+    
+    for i in range(kolom):
+        lis[idx][i] = lisword[i]
+    return lis        
 
 def makeshift_split(kata: str,lenght: int) -> List[str]:
     temp = "" #tempat sementara kata
