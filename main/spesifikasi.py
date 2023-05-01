@@ -67,7 +67,7 @@ def summonjin(logged: List[str]) -> List[str]: # Summon jin oleh Bondowoso
         
         jumlah_jin = function.jumlah_targetList (["jin_pembangun","jin_pengumpul"], userpassrole, 2)
         print(jumlah_jin)
-        if jumlah_jin > 100:
+        if jumlah_jin >= 100:
             print("Jumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu")
             return
         else:
@@ -130,7 +130,7 @@ def hapusjin(logged: List[str]) -> List[str]: # Menghilangkan Jin.
 
         jinhapus = input("\nMasukkan username jin : ") # Input username jin.
 
-        for i in range(102): # loop jumlah index data
+        for i in range(2, 102): # loop jumlah index data
             if jinhapus == userpassrole[i][0]: # jika user baru ada maka return True
                 while True: 
                     # User disuruh input antara Y atau N dalam penghapusan jin.
@@ -150,11 +150,11 @@ def hapusjin(logged: List[str]) -> List[str]: # Menghilangkan Jin.
                         return
                     
                     elif yesno == "N": # Jika tidak, maka akan keluar dari bagian ini.
-                        return("Jin tidak jadi dihapus.")                        
+                        return("\nJin tidak jadi dihapus.\n")                        
                     else:
                         print("\nPilih antara Y atau N.\n")
         else:
-            print("Tidak ada jin dengan username tersebut.")
+            print("\nTidak ada jin dengan username tersebut.\n")
     else:
         print("Hanya Bondowoso yang dapat mengakses command ini.")
 
@@ -163,7 +163,7 @@ def ubahjin(logged: List[str]) -> List[str]:
     if logged[1] == "bandung_bondowoso": #pengecekan login user, jika user adalah bandung bondowoso, fitur ubahjin dapat diakses.
         namajin = input("\nMasukkan username jin: ")
         status = False
-        for i in range (102): #looping sesuai jumlah index data
+        for i in range (2, 102): #looping sesuai jumlah index data
             if userpassrole[i][0] == namajin: #jika userpassrole[i][0] sama dengan masukan pada variable namajin, maka dipastikan username ada
                 status = True #batasan pun berubah menjadi nilai True, dan akan lanjut ke command berikutnya
                 index = i
@@ -418,7 +418,7 @@ def laporanjin(logged: List[str]) -> List[str]:
             for j in range(jumlah_pembuat):
                 if pembuat[j] == "":
                     continue
-                if arr_jin_pembangun[i] == pembuat[j]: # kondisi kalo bahan_bangunan[0][i]};{bahan_bangunan[1][i]};{bahan_bangunan[2][i]} pembuat candi
+                if arr_jin_pembangun[i] == pembuat[j]: # pembuat candi
                     x += 1
                 else: # kondisi kalo beda
                     y += 1
@@ -481,13 +481,17 @@ def laporancandi(logged: List[str]) -> List[str]:
         candi_termurah = harga_candi[0]
         candi_termahal = harga_candi[0]
 
-        for i in range(jumlah_pembuat): # looping ngecek harga candi
-            if harga_candi[i] >= candi_termahal:
-                candi_termahal = harga_candi[i]
-                id_candi_termahal = i
-            elif harga_candi[i] <= candi_termurah:
-                candi_termurah = harga_candi[i]
-                id_candi_termurah = i
+        if jumlah_pembuat == 0:
+            id_candi_termahal = " - "
+            id_candi_termurah = " - "
+        else:
+            for i in range(jumlah_pembuat): # looping ngecek harga candi
+                if harga_candi[i] >= candi_termahal:
+                    candi_termahal = harga_candi[i]
+                    id_candi_termahal = i
+                elif harga_candi[i] <= candi_termurah:
+                    candi_termurah = harga_candi[i]
+                    id_candi_termurah = i
 
         # output
         print("Total Candi: %d" %jumlah_pembuat)
@@ -702,7 +706,7 @@ def helps(logged: List[str]):
         print("8. laporancandi \nUntuk mengambil laporan candi untuk mengetahui progress pembangunan candi")
         print("9. save \nUntuk menjalankan prosedur menyimpan data yang berada di program")
         print("10. exit \nUntuk keluar dari program dan kembali ke terminal")
-        print("11. batchsummon \nUntuk mengsummon jin lebih dari 1 kali.")
+        print("11. summonjinplus \nUntuk mengsummon jin lebih dari 1 kali.")
 
 
     elif logged[1] == "roro_jonggrang": # Output untuk role Roro Jonggrang
@@ -733,7 +737,7 @@ def exit_game():
     check1 = True #batas awal untuk pengecekan apakah command berjalan sesuai / tidak
     while (check1 == True): #memasuki looping selama kondisi batas (check1 masih bernilai True)
         #input untuk memvalidasi pilihan pengguna, apakah mau men-save file yang sudah diupdate atau tidak
-        validasi = str(input("\nApakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n)")) 
+        validasi = str(input("\nApakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) ")) 
         if (validasi.lower()== "n" or validasi.lower()== "y"): #kondisi ke-2 untuk memastikan user hanya menginput nilai y dan n
             if (validasi.lower()=="y"): #kondisi 3, jika user setuju untuk save sebelum melakukan exit
                 save() #memanggil procedure save
@@ -749,7 +753,7 @@ def exit_game():
     exit()
 
 # Batch summon
-def batchsummonjin(logged: List[str]):
+def summonjinplus(logged: List[str]):
 
     if logged[1] == "bandung_bondowoso": # Hanya Bondowoso yang dapat melakukan command ini. 
          # input jumlah jin yang ingin disummon

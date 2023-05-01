@@ -22,7 +22,7 @@ message1 = """
                     █░░║║║╠─║─║─║║║║║╠─░░█
                     █░░╚╩╝╚╝╚╝╚╝╚╝╩─╩╚╝░░█
 """
-message2 = "Permainan dimulai! gunakan command 'help' untuk melihat daftar command yang ada.\n"
+message2 = "Permainan dimulai! Gunakan command 'help' untuk melihat daftar command yang ada.\n"
 
 for i in range(len(message1)):
     print(message1[i], end='', flush=True)
@@ -71,8 +71,8 @@ while True:
         spesifikasi.helps(logged)
     elif cmd == "exit":
         spesifikasi.exit_game()
-    elif cmd == "batchsummonjin":
-        spesifikasi.batchsummonjin(logged)
+    elif cmd == "summonjinplus":
+        spesifikasi.summonjinplus(logged)
     else:
         print('Input anda salah, gunakan command "help" untuk menampilkan daftar command.')
 
